@@ -1,0 +1,9 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      password: user
+      username: user
+      database: easyorder
+#debug: true

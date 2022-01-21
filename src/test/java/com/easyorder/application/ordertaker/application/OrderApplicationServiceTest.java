@@ -1,5 +1,6 @@
 package com.easyorder.application.ordertaker.application;
 
+import com.easyorder.application.ordertaker.domain.EventPublisher;
 import com.easyorder.application.ordertaker.domain.IdGenerator;
 import com.easyorder.application.ordertaker.domain.order.Order;
 import com.easyorder.application.ordertaker.domain.order.OrderRepository;
@@ -7,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +34,11 @@ class OrderApplicationServiceTest {
         }
     };
     private final Clock clock = Clock.fixed(LocalDateTime.MIN.toInstant(UTC), UTC);
+    private EventPublisher eventPublisher = null;
 
     @Test
     void should_create_an_order() {
-        OrderApplicationService service = new OrderApplicationService(inMemoryOrderRepository, fixedIdGenerator, clock);
+        OrderApplicationService service = new OrderApplicationService(inMemoryOrderRepository, fixedIdGenerator, clock, eventPublisher);
 
         String orderId = service.createOrder("restaurantId");
 

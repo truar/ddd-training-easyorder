@@ -7,7 +7,7 @@ import java.util.List;
 public class Order {
     private final String id;
     private final String restaurantId;
-    private final List<OrderLine> orderLines = new ArrayList<>();
+    private List<OrderLine> orderLines = new ArrayList<>();
     private LocalDateTime placeTime;
 
     public Order(String id, String restaurantId) {
@@ -30,9 +30,10 @@ public class Order {
                 .ifPresent(OrderLine::incrementQuantity);
     }
 
-    public void place(LocalDateTime placeTime) {
+    public OrderPlaced place(LocalDateTime placeTime) {
         // TODO Check if orderLines is empty
         this.placeTime = placeTime;
+        return new OrderPlaced(id, orderLines /*, placeTime*/);
     }
 
     public String getId() {
@@ -59,5 +60,13 @@ public class Order {
 
     public LocalDateTime getPlaceTime() {
         return placeTime;
+    }
+
+    public void setPlaceTime(LocalDateTime placeTime) {
+        this.placeTime = placeTime;
+    }
+
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 }

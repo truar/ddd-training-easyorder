@@ -29,4 +29,16 @@ public class OrderLine {
     public int getQuantity() {
         return quantity;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 }
