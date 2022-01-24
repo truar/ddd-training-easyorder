@@ -8,7 +8,7 @@ import java.util.UUID;
 
 // Infrastructure service
 @Service
-public class UuidIdGenerator implements IdGenerator {
+public class UuidGenerator implements IdGenerator {
     @Override
     public String generate() {
         return UUID.randomUUID().toString();

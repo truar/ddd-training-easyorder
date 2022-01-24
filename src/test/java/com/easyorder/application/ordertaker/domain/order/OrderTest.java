@@ -61,7 +61,7 @@ class OrderTest {
     }
 
     @Test
-    void place_order() {
+    void place_order() throws EmptyOrderException {
         Order order = new Order(ORDER_ID, RESTAURANT_ID);
         OrderLine orderLine = new OrderLine(ORDER_LINE_ID, ORDER_LINE_NAME, 1000, ORDER_LINE_COMMENT);
         order.addOrderLine(orderLine);

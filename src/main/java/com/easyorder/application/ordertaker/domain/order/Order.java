@@ -30,8 +30,11 @@ public class Order {
                 .ifPresent(OrderLine::incrementQuantity);
     }
 
-    public OrderPlaced place(LocalDateTime placeTime) {
+    public OrderPlaced place(LocalDateTime placeTime) throws EmptyOrderException {
         // TODO Check if orderLines is empty
+        if(orderLines.isEmpty()) {
+            throw new EmptyOrderException();
+        }
         this.placeTime = placeTime;
         return new OrderPlaced(id, orderLines /*, placeTime*/);
     }

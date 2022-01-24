@@ -1,10 +1,14 @@
 package com.easyorder.application.ordertaker.api.order;
 
 import com.easyorder.application.ordertaker.application.OrderApplicationService;
+import com.easyorder.application.ordertaker.domain.order.EmptyOrderException;
 import com.easyorder.application.ordertaker.domain.order.Order;
 import com.easyorder.application.ordertaker.domain.order.OrderLine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +18,8 @@ import java.util.stream.Collectors;
 public class OrderController {
 
     private final OrderApplicationService orderApplicationService;
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     public OrderController(OrderApplicationService orderApplicationService) {
         this.orderApplicationService = orderApplicationService;
@@ -34,7 +40,12 @@ public class OrderController {
 
     @PostMapping("/{orderId}:placeOrder")
     public void placeOrder(@PathVariable String orderId) {
-        orderApplicationService.placeOrder(orderId);
+        try {
+            orderApplicationService.placeOrder(orderId);
+        } catch (EmptyOrderException e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{orderId}")

@@ -3,10 +3,7 @@ package com.easyorder.application.ordertaker.application;
 
 import com.easyorder.application.ordertaker.domain.EventPublisher;
 import com.easyorder.application.ordertaker.domain.IdGenerator;
-import com.easyorder.application.ordertaker.domain.order.Order;
-import com.easyorder.application.ordertaker.domain.order.OrderLine;
-import com.easyorder.application.ordertaker.domain.order.OrderPlaced;
-import com.easyorder.application.ordertaker.domain.order.OrderRepository;
+import com.easyorder.application.ordertaker.domain.order.*;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -31,6 +28,7 @@ public class OrderApplicationService {
 //        LocalDateTime creationDate = LocalDateTime.now(clock);
         Order order = new Order(id, restaurantId/*, creationDate*/);
         orderRepository.save(order);
+        System.out.println(id);
         return id;
     }
 
@@ -44,7 +42,7 @@ public class OrderApplicationService {
         orderRepository.save(order);
     }
 
-    public void placeOrder(String orderId) {
+    public void placeOrder(String orderId) throws EmptyOrderException {
         Order order = orderRepository.findById(orderId);
         LocalDateTime placeTime = LocalDateTime.now(clock);
         OrderPlaced orderPlaced = order.place(placeTime);

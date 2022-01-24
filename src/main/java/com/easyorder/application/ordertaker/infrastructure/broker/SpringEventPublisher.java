@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-//@Profile("spring")
+@Profile("inmemory")
 public class SpringEventPublisher implements EventPublisher {
 
     private final ApplicationEventPublisher eventPublisher;
