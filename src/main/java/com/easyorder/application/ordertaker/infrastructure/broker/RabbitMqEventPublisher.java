@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Profile("rabbit")
 public class RabbitMqEventPublisher implements EventPublisher {
 
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     public RabbitMqEventPublisher(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;

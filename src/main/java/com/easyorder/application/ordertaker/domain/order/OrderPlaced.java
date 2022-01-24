@@ -19,7 +19,7 @@ public class OrderPlaced extends DomainEvent {
                 .collect(toList());
     }
 
-    private class OrderedItem {
+    private static class OrderedItem {
         private final String name;
         private final int quantity;
         private final String comment;
