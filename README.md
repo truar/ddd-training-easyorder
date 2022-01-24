@@ -31,7 +31,7 @@ docker run -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3-management
 ./mvnw clean install
 ```
 
-* All Inmemory
+* All Inmemory (inmemory database & spring event publisher)
 ```shell script
 java -Dspring.profiles.active=inmemory -jar target/application-0.0.1-SNAPSHOT.jar
 ```
